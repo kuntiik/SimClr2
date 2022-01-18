@@ -1,0 +1,30 @@
+
+first_conv : False
+maxpool1 : False
+temperature : 0.5
+name : "cifar10"
+
+data :
+  _target_ : pl_bolts.datamodules.CIFAR10DataModule
+  # data_dir : "C:/dev/datasets/"
+  data_dir : "/home.stud/kuntluka/dataset"
+  batch_size : 128
+  num_workers : 4
+  val_split : 5000
+
+train_transforms:
+  _target_ : pl_bolts.models.self_supervised.simclr.transforms.SimCLRTrainDataTransform
+  input_height : 32
+  gaussian_blur : False
+  jitter_strength : 0.5
+  normalize :
+    _target_ : pl_bolts.transforms.dataset_normalizations.cifar10_normalization
+
+val_transforms:
+  _target_ : pl_bolts.models.self_supervised.simclr.transforms.SimCLREvalDataTransform
+  input_height : 32
+  gaussian_blur : False
+  jitter_strength : 0.5
+  normalize :
+    _target_ : pl_bolts.transforms.dataset_normalizations.cifar10_normalization
+  

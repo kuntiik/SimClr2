@@ -1,0 +1,5 @@
+defaults:
+  - _self_
+  - trainer : default_trainer.yaml
+  - module : simclr.yaml
+  - datamodule : cifar10.yaml

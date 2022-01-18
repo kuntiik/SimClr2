@@ -1,0 +1,5 @@
+_target_ : pytorch_lightning.Trainer
+gpus : 1
+max_epochs : 150 
+auto_select_gpus : True
+# fast_dev_run : True

@@ -1,0 +1,25 @@
+_target_ : src.modules.SimClr.SimCLR
+# _target_ : SimCLR.SimCLR
+gpus : ${trainer.gpus}
+batch_size : ${datamodule.data.batch_size}
+dataset : ${datamodule.name}
+num_nodes : 1
+arch : resnet50
+hidden_mlp : 2048
+feat_dim : 128
+warmup_epochs : 10
+max_epochs : ${trainer.max_epochs}
+temperature : ${datamodule.temperature}
+first_conv : ${datamodule.first_conv}
+maxpool1 : ${datamodule.first_conv}
+# optimizer : "adam"
+exclude_bn_bias : True
+# start_lr : 0.0
+# learning_rate : 1e-3
+# final_lr : 0.0
+weight_decay : 1e-6
+
+optimizer : "lars"
+learning_rate : 4.8
+final_lr : 0.0048
+start_lr : 0.3

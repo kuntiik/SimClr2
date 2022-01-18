@@ -1,0 +1,26 @@
+first_conv : True
+maxpool1 : True
+temperature : 0.5
+name : "boxes"
+
+data:
+  _target_ : src.datamodules.boxes_datamodule.BoxesDataModule
+  image_dir : "/home.stud/kuntluka/clustering/data/images/images/"
+  batch_size : 64
+  num_workers : 8
+
+train_transforms:
+  _target_ : pl_bolts.models.self_supervised.simclr.transforms.SimCLRTrainDataTransform
+  input_height : 224
+  gaussian_blur : True
+  jitter_strength : 1.0
+  normalize :
+    _target_ : src.datamodules.boxes_datamodule.BoxesDataModule.boxes_normalization
+
+val_transforms:
+  _target_ : pl_bolts.models.self_supervised.simclr.transforms.SimCLREvalDataTransform
+  input_height : 224
+  gaussian_blur : True
+  jitter_strength : 1.0
+  normalize :
+    _target_ : src.datamodules.boxes_datamodule.BoxesDataModule.boxes_normalization
